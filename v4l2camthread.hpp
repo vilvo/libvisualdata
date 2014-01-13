@@ -17,10 +17,9 @@
 class v4l2camthread : public visualdatainterface {
     public:
         v4l2camthread(const uint width, const uint height,
-		   const bool undistort,
-		   const uint fps,
-		   const std::string undistortionparameters,
-                   boost::function<void(cv::Mat&)> callback);
+                      const bool undistort, const uint fps,
+                      const std::string undistortionparameters,
+                      boost::function<void(cv::Mat&)> callback);
         ~v4l2camthread();
 
     private:
