@@ -1,0 +1,11 @@
+Source: libvisualdata
+Maintainer: Ville Ilvonen <ville.ilvonen@intel.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+
+Package: libvisualdata
+Architecture: all
+Description: library to access visualdata sources for computer-vision testing
+
