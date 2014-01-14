@@ -20,7 +20,7 @@
 project(libvisualdata)
 cmake_minimum_required (VERSION 2.6)
 set(LIBRARY_OUTPUT_PATH lib)
-#set(CMAKE_CXX_FLAGS "-Wall -D=HAVE_CONFIG_H")
+set(CMAKE_CXX_FLAGS "-Wall -D=HAVE_CONFIG_H")
 find_package(OpenCV REQUIRED)
 
 add_library(libvisualdata SHARED
