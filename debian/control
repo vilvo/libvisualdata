@@ -3,7 +3,7 @@ Maintainer: Ville Ilvonen <ville.ilvonen@intel.com>
 Section: misc
 Priority: optional
 Standards-Version: 3.9.2
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper (>= 9), cmake
 
 Package: libvisualdata
 Architecture: all
