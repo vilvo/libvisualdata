@@ -1,0 +1,5 @@
+visualdatainterface.hpp usr/include/visualdata/
+imagesource.hpp usr/include/visualdata/
+adbscreenshotthread.hpp usr/include/visualdata/
+v4l2camthread.hpp usr/include/visualdata/
+idscamthread.hpp usr/include/visualdata/

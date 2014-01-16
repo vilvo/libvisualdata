@@ -3,9 +3,14 @@ Maintainer: Ville Ilvonen <ville.ilvonen@intel.com>
 Section: misc
 Priority: optional
 Standards-Version: 3.9.2
-Build-Depends: debhelper (>= 9), cmake
+Build-Depends: debhelper (>= 9), cmake, opencv, libboost-dev
 
 Package: libvisualdata
 Architecture: all
-Description: library to access visualdata sources for computer-vision testing
+Description: visualdata sources for computer-vision testing
+Depends: opencv, libboost-thread1.46.1
 
+Package: libvisualdata-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: visualdata sources for computer-vision testing (dev files)
