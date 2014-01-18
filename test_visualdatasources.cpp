@@ -25,7 +25,6 @@
 #include "visualdatainterface.hpp"
 #include "imagesource.hpp"
 #include "v4l2camthread.hpp"
-#include "idscamthread.hpp"
 #include "adbscreenshotthread.hpp"
 
 #include <opencv2/opencv.hpp> // cv::Mat

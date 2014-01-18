@@ -17,24 +17,35 @@
 #
 project(libvisualdata)
 cmake_minimum_required (VERSION 2.6)
+include(CheckIncludeFile)
+
 set(LIBRARY_OUTPUT_PATH lib)
 set(CMAKE_CXX_FLAGS "-Wall -D=HAVE_CONFIG_H")
 find_package(OpenCV REQUIRED)
+find_file(UEYE_H ueye.h PATHS "/usr/include")
+find_library(UEYE_LIB ueye_api)
 
-add_library(libvisualdata SHARED
+set(VISUAL_DATA_SRCS
     visualdatainterface.cpp
     imagesource.cpp
     v4l2camthread.cpp
-    idscamthread.cpp
     adbscreenshotthread.cpp
 )
-
-target_link_libraries(libvisualdata
+set(VISUAL_DATA_LIBS
     ${OpenCV_LIBRARIES}
-    # TODO - build with ueye_api for IDS camera support only if available
-    ueye_api
     boost_thread
 )
+
+if(UEYE_H AND UEYE_LIB)
+    set(VISUAL_DATA_SRCS ${VISUAL_DATA_SRCS} idscamthread.cpp)
+    set(VISUAL_DATA_LIBS ${VISUAL_DATA_LIBS} ueye_api)
+else()
+    message("-- IDS uEye SDK not installed: "
+            "compiled without IDS camera support")
+endif()
+
+add_library(libvisualdata SHARED ${VISUAL_DATA_SRCS})
+target_link_libraries(libvisualdata ${VISUAL_DATA_LIBS})
 
 set_target_properties(libvisualdata PROPERTIES OUTPUT_NAME visualdata)
 install(TARGETS libvisualdata LIBRARY DESTINATION lib)
@@ -42,14 +53,7 @@ install(TARGETS libvisualdata LIBRARY DESTINATION lib)
 include_directories( ${OpenCV_INCLUDE_DIRS} "/usr/local/include")
 link_directories(${OpenCV_LIBRARY_DIRS} "/usr/local/lib")
 
-add_executable(test_visualdata
-    visualdatainterface.cpp
-    imagesource.cpp
-    v4l2camthread.cpp
-    idscamthread.cpp
-    adbscreenshotthread.cpp
-    test_visualdatasources.cpp
-)
+add_executable(test_visualdata ${VISUAL_DATA_SRCS} test_visualdatasources.cpp)
 
 target_link_libraries(test_visualdata
     gtest_main pthread gtest libvisualdata
